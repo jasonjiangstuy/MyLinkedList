@@ -10,10 +10,11 @@ public class MyLinkedList{
         return size;
     };
     public boolean add(String value){
-        return add(size, value);
+        add(size, value);
+        return true;
     };
-    public boolean add(int index, String value){
-        if (index <= size || index < 0){
+    public void add(int index, String value){
+        if (index <= size && index >= 0){
             if (start != null){
                 if (index == size){
                     // append item
@@ -47,14 +48,13 @@ public class MyLinkedList{
                 Node hold = new Node(value);
                 start = hold;
                 end = hold;
-                size += 1;
-                return true;
+                
+
             }
-            
+            size += 1;
         }else{
             throw new IndexOutOfBoundsException();
         }
-        return true;
     };
     public String get(int index){
         if (index <= size || index < 0){
@@ -91,7 +91,20 @@ public class MyLinkedList{
             pointer = pointer.getNext();
             result += ", ";
         }
-        return result.substring(0, result.length() - 1) + "]";
+        return result.substring(0, result.length() - 2) + "]";
+    };
+
+    public String toStringReversed(){
+        Node pointer = end;
+        String result = "[";
+        for (int i = size; i > 0; i--){
+            result += pointer.getData();
+            
+            pointer = pointer.getPrev();
+            result += ", ";
+            // System.out.println(i);
+        }
+        return result.substring(0, result.length() - 2) + "]";
     };
     //Any helper method that returns a Node object MUST BE PRIVATE!
    }
