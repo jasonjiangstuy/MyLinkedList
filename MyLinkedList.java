@@ -57,7 +57,7 @@ public class MyLinkedList{
         }
     };
     public String get(int index){
-        if (index <= size || index < 0){
+        if (index <= size && index >= 0){
             Node pointer = start;
             for (int i = 0; i < index; i++){
                 pointer = pointer.getNext();
@@ -68,7 +68,7 @@ public class MyLinkedList{
         }
     };
     public String set(int index, String value){
-        if (index <= size || index < 0){
+        if (index <= size && index >= 0){
             Node pointer = start;
             for (int i = 0; i < index; i++){
                 pointer = pointer.getNext();
@@ -91,20 +91,86 @@ public class MyLinkedList{
             pointer = pointer.getNext();
             result += ", ";
         }
-        return result.substring(0, result.length() - 2) + "]";
+        if (result.length() > 3){
+            // System.out.println(result);
+            result = result.substring(0, result.length() - 2);
+        }
+
+        return result + "]";
     };
 
     public String toStringReversed(){
         Node pointer = end;
+        System.out.println(pointer);
+        if (pointer == null){
+            return "[]";
+        }
+
         String result = "[";
-        for (int i = size; i > 0; i--){
+        for (int i = size; i > 1; i--){
+            // System.out.println(pointer.getData());
             result += pointer.getData();
             
             pointer = pointer.getPrev();
             result += ", ";
             // System.out.println(i);
         }
-        return result.substring(0, result.length() - 2) + "]";
+        if (result.length() > 3){
+            // System.out.println(result);
+            result = result.substring(0, result.length() - 2);
+        }
+        return result + "]";
     };
-    //Any helper method that returns a Node object MUST BE PRIVATE!
+    public String remove(int index){
+        if (index <= size && index >= 0){
+            String result;
+            if (size == 1){
+                // removing the final element of a list (size 1 list)
+                result = start.getData();
+                end = null;
+                start = null;
+                size -= 1;
+            }
+            // removing the tail
+            else if (index == size){
+                result = end.getData();
+                end = end.getPrev();
+                end.setNext(null);
+                size -= 1;
+            }
+
+            // head/
+            else if (index == 0){
+                result = start.getData();
+                start = start.getNext();
+                start.setPrev(null);
+                size -= 1;
+            }
+            // , and removing from the middle
+            else{
+                Node pointer = start;
+                for (int i = 0; i < index; i++){
+                    pointer = pointer.getNext();
+                }
+                pointer.getPrev().setNext(pointer.getNext());
+                pointer.getNext().setPrev(pointer.getPrev());
+                result = pointer.getData();
+                size -= 1;
+            }
+            return result;
+        }
+        else{
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void extend(MyLinkedList other){
+        end.setNext(other.start);
+        other.start.setPrev(end);
+        end = other.end;
+        size += other.size;
+        other.size = 0;
+        other.start = null;
+        other.end = null;
+    }    
    }
