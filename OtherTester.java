@@ -128,7 +128,9 @@ public class OtherTester {
             m.add("world");
             m.add("foo");
             m.add("bar");
+            System.out.println(m.get(3));
             check(test, m.get(3), "bar");
+            
             m.get(4);
             noException(test, "IndexOutOfBoundsException");
         } catch(IndexOutOfBoundsException e) {
@@ -144,6 +146,7 @@ public class OtherTester {
             m.add("foo");
             m.add("bar");
             check(test, m.set(1, "huzzah"), "world");
+            System.out.println(test.toString());
             check(test, m.toString(), "[hello, huzzah, foo, bar]");
         } catch(IndexOutOfBoundsException e) {
         } catch(RuntimeException e) {
@@ -157,6 +160,7 @@ public class OtherTester {
             m.add("world");
             m.add("foo");
             m.add("bar");
+            // System.out.println(m.toStringReversed());
             check(test, m.toStringReversed(), "[bar, foo, world, hello]");
         } catch(RuntimeException e) {
             except(test, e);

@@ -77,6 +77,8 @@ public class MyLinkedList{
             Node myNew = new Node(value);
             pointer.getNext().setPrev(myNew);
             pointer.getPrev().setNext(myNew);
+            myNew.setPrev(pointer.getPrev());
+            myNew.setNext(pointer.getNext());
             pointer = myNew; // does this change all the pointers before, after
             return hold;
         }else{
@@ -107,7 +109,7 @@ public class MyLinkedList{
         }
 
         String result = "[";
-        for (int i = size; i > 1; i--){
+        for (int i = size; i > 0; i--){
             // System.out.println(pointer.getData());
             result += pointer.getData();
             
