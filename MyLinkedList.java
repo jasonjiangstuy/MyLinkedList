@@ -103,7 +103,7 @@ public class MyLinkedList{
 
     public String toStringReversed(){
         Node pointer = end;
-        System.out.println(pointer);
+        // System.out.println(pointer);
         if (pointer == null){
             return "[]";
         }
