@@ -57,7 +57,7 @@ public class MyLinkedList{
         }
     };
     public String get(int index){
-        if (index <= size && index >= 0){
+        if (index < size && index >= 0){
             Node pointer = start;
             for (int i = 0; i < index; i++){
                 pointer = pointer.getNext();
@@ -68,7 +68,7 @@ public class MyLinkedList{
         }
     };
     public String set(int index, String value){
-        if (index <= size && index >= 0){
+        if (index < size && index >= 0){
             Node pointer = start;
             for (int i = 0; i < index; i++){
                 pointer = pointer.getNext();
